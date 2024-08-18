@@ -1,5 +1,5 @@
 @props([
-    'fontWeight' => '',
+    'fontWeight' => 'medium',
 ])
 
 <div class="w-full p-2.5 bg-gray-100 border border-gray-300 rounded-lg mb-3" role="alert">

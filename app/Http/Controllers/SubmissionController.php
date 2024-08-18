@@ -2,22 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Imports\ClaimImport;
-use Carbon\Carbon;
+use App\Imports\SubmissionImport;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 use Maatwebsite\Excel\Facades\Excel;
 
-class ClaimController extends Controller
+class SubmissionController extends Controller
 {
     public function index(): View
     {
-        return view('claim', [
-            'title' => 'DCN',
-            'status' => 1
+        return view('submission', [
+            'title' => 'Rawat Jalan / Bayi',
+            'status' => 2
         ]);
     }
 
@@ -27,13 +25,13 @@ class ClaimController extends Controller
             'file' => 'required|max:2048'
         ]);
 
-        Excel::import(new ClaimImport, $request->file('file'));
+        Excel::import(new SubmissionImport, $request->file('file'));
 
-        return redirect()->route('submission.index')->with(['success' => 'File klaim BPJS berhasil disimpan']);
+        return redirect()->route('submission.index')->with(['success' => 'File Rawat Jalan / Bayi berhasil disimpan']);
     }
 
     public function downloadTemplate()
     {
-        return Storage::download('templates/TemplateKlaim.xlsx');
+        return Storage::download('templates/TemplatePengajuan.xlsx');
     }
 }
