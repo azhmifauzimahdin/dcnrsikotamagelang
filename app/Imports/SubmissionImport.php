@@ -5,8 +5,9 @@ namespace App\Imports;
 use App\Models\Submission;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Maatwebsite\Excel\Concerns\WithUpserts;
 
-class SubmissionImport implements ToModel, WithHeadingRow
+class SubmissionImport implements ToModel, WithHeadingRow, WithUpserts
 {
     /**
      * @param array $row
@@ -36,5 +37,10 @@ class SubmissionImport implements ToModel, WithHeadingRow
             'patname' => 'required',
             'patsep' => 'required'
         ];
+    }
+
+    public function uniqueBy()
+    {
+        return 'patsep';
     }
 }

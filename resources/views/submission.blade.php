@@ -128,7 +128,7 @@
             tabeldata.classList.add('mt-3');
             if (jsonData.length > 0) {
                 let htmlDataHead =
-                    '<tr class="text-left"><th>No</th><th>Tgl. Masuk</th><th>Tgl. Pulang</th><th>No. RM</th><th>Nama Pasien</th><th>No. Klaim / SEP</th><th>Total Rajal</th><th>Total Bayi</th></tr>';
+                    '<tr><th>No</th><th>Tgl. Masuk</th><th>Tgl. Pulang</th><th>No. RM</th><th>Nama Pasien</th><th>No. Klaim / SEP</th><th>Total Rajal</th><th>Total Bayi</th></tr>';
                 tablehead.innerHTML = htmlDataHead;
                 let htmlData = ' ';
                 jsonData.forEach((row, i) => {

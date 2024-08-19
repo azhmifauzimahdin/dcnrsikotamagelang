@@ -12,12 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('claims', function (Blueprint $table) {
-            $table->id();
-            $table->string('admdatetime');
-            $table->string('disdatetime');
+            $table->string('patsep', 20)->unique();
+            $table->string('admdatetime', 40);
+            $table->string('disdatetime', 40);
             $table->integer('patid');
-            $table->string('patname');
-            $table->string('patsep');
+            $table->string('patname', 125);
             $table->bigInteger('totalbpjs');
             $table->bigInteger('totalrs');
             $table->timestamps();

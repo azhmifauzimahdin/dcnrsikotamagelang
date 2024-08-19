@@ -5,8 +5,9 @@ namespace App\Imports;
 use App\Models\Claim;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Maatwebsite\Excel\Concerns\WithUpserts;
 
-class ClaimImport implements ToModel, WithHeadingRow
+class ClaimImport implements ToModel, WithHeadingRow, WithUpserts
 {
     /**
      * @param array $row
@@ -37,5 +38,10 @@ class ClaimImport implements ToModel, WithHeadingRow
             'totalbpjs' => 'required',
             'totalrs' => 'required'
         ];
+    }
+
+    public function uniqueBy()
+    {
+        return 'patsep';
     }
 }

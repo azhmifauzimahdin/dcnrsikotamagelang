@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Imports\SubmissionImport;
+use App\Models\Claim;
+use App\Models\Dcn;
+use App\Models\Submission;
+use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -27,7 +31,23 @@ class SubmissionController extends Controller
 
         Excel::import(new SubmissionImport, $request->file('file'));
 
-        return redirect()->route('submission.index')->with(['success' => 'File Rawat Jalan / Bayi berhasil disimpan']);
+        Dcn::truncate();
+        $claims = Claim::get();
+        $now = Carbon::now();
+        $dcn = [];
+        foreach ($claims as $claim) {
+            $dcn[] = [
+                'patsep' => $claim->patsep,
+                'dcndate' => $now,
+                'totalsubmitted' => $claim->totalrs - $claim->submission->totalrajal,
+                'totalapproved' => $claim->totalbpjs - $claim->submission->totalrajal - $claim->submission->totalbayi,
+                'created_at' => $now,
+                'updated_at' => $now
+            ];
+        }
+        Dcn::insert($dcn);
+
+        return redirect()->route('dcn.index')->with(['success' => 'File Rawat Jalan / Bayi berhasil disimpan']);
     }
 
     public function downloadTemplate()

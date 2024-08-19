@@ -7,15 +7,18 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @stack('head')
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <script src="https://kit.fontawesome.com/0546d73a27.js" crossorigin="anonymous"></script>
     <link rel="shortcut icon" href="{{ asset('storage/assets/img/logo.png') }}" />
     <title>{{ $title }}</title>
 
 </head>
 
 <body class="bg-gray-200">
-    <h1 class="text-center text-2xl text-gray-800 font-semibold pt-4">
-        DCN RSI KOTA MAGELANG
-    </h1>
+    <a href="{{ route('claim.index') }}">
+        <h1 class="text-center text-2xl text-gray-800 font-semibold pt-4">
+            DCN RSI KOTA MAGELANG
+        </h1>
+    </a>
     <div class="container mx-auto p-4 text-gray-800">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
             <x-card.card bg="gray-50" class="order-1 md:order-first">
