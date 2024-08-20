@@ -26,6 +26,7 @@ class ClaimController extends Controller
             'file' => 'required|max:2048'
         ]);
 
+        Claim::whereNotNull('patsep')->delete();
         Excel::import(new ClaimImport, $request->file('file'));
 
         return redirect()->route('submission.index')->with(['success' => 'File klaim BPJS berhasil disimpan']);

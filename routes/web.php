@@ -20,4 +20,5 @@ Route::controller(SubmissionController::class)->group(function () {
 Route::controller(DcnController::class)->group(function () {
     Route::get('/dcn', 'index')->name('dcn.index');
     Route::get('/dcn/export', 'export')->name('dcn.export');
+    Route::delete('/dcn/new', 'destroy')->name('dcn.destroy');
 });

@@ -29,6 +29,7 @@ class SubmissionController extends Controller
             'file' => 'required|max:2048'
         ]);
 
+        Submission::truncate();
         Excel::import(new SubmissionImport, $request->file('file'));
 
         Dcn::truncate();

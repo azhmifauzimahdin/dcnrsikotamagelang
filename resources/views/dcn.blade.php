@@ -17,6 +17,11 @@
                 Export
             </x-button.info>
         </a>
+        <form action="{{ route('dcn.destroy') }}" method="POST" class="inline">
+            @method('delete')
+            @csrf
+            <x-button.success type="submit" id="new_dcn">New DCN</x-button.success>
+        </form>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 mb-4 gap-y-2 gap-x-12">
         <div class="grid grid-cols-2 gap-2">
@@ -33,7 +38,7 @@
         </div>
     </div>
     <div class="relative overflow-x-auto" id="tabel-data">
-        <table class="w-full bg-gray-100">
+        <table class="w-full bg-gray-100 mb-5">
             <thead>
                 <tr>
                     <th>No</th>
@@ -59,5 +64,31 @@
                 @endforelse
             </tbody>
         </table>
+        <a href="{{ route('submission.index') }}">
+            <x-button.secondary type="button" id="back">Kembali</x-button.secondary>
+        </a>
     </div>
 @endsection
+
+@push('script')
+    <script type="module">
+        $('#new_dcn').click(function(event) {
+            var form = $(this).closest("form");
+            event.preventDefault();
+            Swal.fire({
+                title: 'Apakah Anda Yakin?',
+                text: "Data Anda tidak dapat dikembalikan.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            })
+        });
+    </script>
+@endpush

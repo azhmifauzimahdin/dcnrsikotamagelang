@@ -20,7 +20,9 @@ class DcnExport implements FromQuery, WithHeadings, WithMapping, ShouldAutoSize
         return [
             $number++,
             $dcn->patsep,
+            '',
             Carbon::parse($dcn->dcndate)->format('d/m/Y'),
+            '',
             $dcn->totalsubmitted,
             $dcn->totalapproved
         ];
@@ -34,11 +36,24 @@ class DcnExport implements FromQuery, WithHeadings, WithMapping, ShouldAutoSize
     public function headings(): array
     {
         return [
-            'No',
-            'No.SEP',
-            'Tgl. Verifikasi',
-            'Biaya Diajukan',
-            'Biaya Disetujui'
+            [
+                'No',
+                'No.SEP',
+                '',
+                'Tgl. Verifikasi',
+                '',
+                'Biaya',
+                'Biaya'
+            ],
+            [
+                'No',
+                'No.SEP',
+                '',
+                'Tgl. Verifikasi',
+                '',
+                'Diajukan',
+                'Disetujui'
+            ]
         ];
     }
 }

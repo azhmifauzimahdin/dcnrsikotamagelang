@@ -26,6 +26,9 @@
         @csrf
         <x-input.input type="file" name="file" id="file">File</x-input.input>
         <x-button.primary type="submit" id="simpan">Simpan</x-button.primary>
+        <a href="{{ route('claim.index') }}">
+            <x-button.secondary type="button" id="back">Kembali</x-button.secondary>
+        </a>
     </form>
     <div class="relative overflow-x-auto" id="tabel-data">
         <table class="w-full bg-gray-100">

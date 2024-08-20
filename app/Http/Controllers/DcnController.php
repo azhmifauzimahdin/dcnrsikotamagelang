@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Exports\DcnExport;
 use App\Models\Claim;
 use App\Models\Dcn;
+use App\Models\Submission;
 use Carbon\Carbon;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Number;
 use Illuminate\View\View;
 use Maatwebsite\Excel\Facades\Excel;
@@ -43,5 +45,12 @@ class DcnController extends Controller
     public function export()
     {
         return Excel::download(new DcnExport, 'FPKBPJS.csv');
+    }
+
+    public function destroy(): RedirectResponse
+    {
+        Submission::truncate();
+        Claim::whereNotNull('patsep')->delete();
+        return redirect()->route('claim.index');
     }
 }
